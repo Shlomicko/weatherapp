@@ -1,0 +1,16 @@
+<form class="autocomplete-form">
+  <mat-form-field class="form-item-field">
+    <input #cityQuery
+           type="text"
+           aria-label="Text"
+           matInput
+           placeholder="Search location"
+           [formControl]="autoFormControl"
+           [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onLocationItemClick($event)" panelWidth="250px">
+      <mat-option *ngFor="let city of citiesList | locationType: 'City'" [value]="city.LocalizedName">
+        {{ city.LocalizedName }} ({{ city.Country.LocalizedName }})
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

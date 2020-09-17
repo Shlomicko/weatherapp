@@ -1,0 +1,14 @@
+app-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: var(--bg-color);
+  color: var(--text-color);
+  z-index: 2;
+}
+
+.app-container.dark-mode {
+  --bg-color: black;
+  --text-color: white;
+}

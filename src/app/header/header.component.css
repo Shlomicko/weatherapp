@@ -1,0 +1,43 @@
+nav{
+  position: relative;
+  padding: 8px 16px;
+}
+
+header{
+  width: 80%;
+  margin: auto;
+}
+.nav-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.weather-app-logo{
+  height: 26px;
+  margin: 0 4px 3px 0;
+  vertical-align: middle;
+}
+
+.units-radio-group{
+  display: flex;
+  flex-direction: column;
+  margin: -18px 0 0 0px;
+}
+
+.unit-radio-button{
+  height: 42px;
+  padding-left: 10px;
+}
+
+button {
+  height: fit-content;
+}
+
+.flex-spacer{
+  flex-grow: 1;
+}
+
+.api-input{
+  width: 150px;
+}

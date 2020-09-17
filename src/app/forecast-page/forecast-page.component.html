@@ -1,0 +1,38 @@
+<section class="page-container">
+  <app-autocomplete class="autocomplete-panel" [class.dark-mode]="isDarkMode" (locationSelected)="onLocationItemClick($event)">
+  </app-autocomplete>
+
+  <mat-card *ngIf="forecastData" class="current-conditions-wrapper">
+    <div class="forecast-image">
+      <img src="../../assets/sunny_city.jpg" [alt]="selectedCity?.LocalizedName">
+      <div class="current-conditions-forecast">
+        <h2><mat-icon class="location-icon" color="primary">location_on</mat-icon>{{ selectedCity?.LocalizedName }}</h2>
+        <h4>{{ selectedCity?.Country.LocalizedName }}</h4>
+        <div>{{ currentConditionsData?.LocalObservationDateTime | date: 'MMM d, E' }}</div>
+        <div>{{ currentConditionsData?.WeatherText }}</div>
+        <button mat-icon-button class="favorite-button" (click)="onFavoriteToggle()"
+                [color]="isFavoriteColor" aria-label="add to favorite button">
+          <mat-icon>favorite</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="next-days-forecast">
+    <mat-card class="mat-elevation-z4 day-forecast" background-color="primary" *ngFor="let fullDay of forecastData?.DailyForecasts">
+      <mat-card-header>
+        <mat-card-title>{{ fullDay.Date | date: 'MMM d, E' }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ fullDay.Day.IconPhrase }}
+        </mat-card-subtitle>
+        <mat-card-subtitle>
+          {{ fullDay.Temperature.Minimum.Value }}<span
+          [innerHTML]="forecastData.temperatureSymbol | htmlEntity"></span> -
+          {{ fullDay.Temperature.Maximum.Value}}<span
+          [innerHTML]="forecastData.temperatureSymbol | htmlEntity">}</span>
+        </mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+</section>
