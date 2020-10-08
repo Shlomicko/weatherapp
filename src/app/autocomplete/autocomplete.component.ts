@@ -6,6 +6,10 @@ import {fromEvent, Subject} from 'rxjs';
 import {CityLocation} from '../models/city-location';
 import {debounceTime, distinctUntilChanged, filter, map, takeUntil} from 'rxjs/operators';
 import {WeatherService} from '../services/weather.service';
+import {Store} from "@ngrx/store";
+import {AppState} from "../app.state";
+import {ActionNames} from "../store/action-names";
+import {autoCompleteResultsSelector} from "../store/autocomplete.state";
 
 @Component({
   selector: 'app-autocomplete',
@@ -23,7 +27,12 @@ export class AutocompleteComponent implements OnDestroy, AfterViewInit {
   public selectedCity: CityLocation;
   private dispose$: Subject<void> = new Subject<void>();
 
-  constructor(private _weatherService: WeatherService) { }
+  constructor(private _weatherService: WeatherService, private store: Store<AppState>) {
+    store.select(autoCompleteResultsSelector).subscribe(cities => {
+      console.log('AutocompleteComponent', cities);
+      this.citiesList = cities;
+    });
+  }
 
   ngAfterViewInit(): void {
     fromEvent<KeyboardEvent>(this.cityQuery.nativeElement, 'keyup').pipe(
@@ -35,9 +44,10 @@ export class AutocompleteComponent implements OnDestroy, AfterViewInit {
       }),
       distinctUntilChanged()
     ).subscribe((query: string) => {
-      this._weatherService.getAutoCompleteResults(query).subscribe(
+      this.store.dispatch({type: ActionNames.GET_AUTOCOMPLETE, payload: query});
+      /*this._weatherService.getAutoCompleteResults(query).subscribe(
         cities => this.citiesList = cities
-      );
+      );*/
     });
   }
 

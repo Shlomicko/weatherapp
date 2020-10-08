@@ -1,11 +1,11 @@
-import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit} from '@angular/core';
 import {WeatherService} from '../services/weather.service';
 import {CityLocation} from '../models/city-location';
 import {Subject, zip} from 'rxjs';
 import {ForecastData} from '../models/forecast-data';
 import {CurrentConditionsData} from '../models/current-conditions-data';
 import {Store} from '@ngrx/store';
-import {AppState} from '../app.state';
+import {AppState, selectWeather} from '../app.state';
 import {temperatureUnitSelector} from '../store/configuration.state';
 import {ToggleFavoritesAction} from '../store/favorite.actions';
 import {favoritesSelector} from '../store/favorite.state';
@@ -14,7 +14,9 @@ import {ActivatedRoute} from '@angular/router';
 import {FavoriteData} from '../models/favorite-data';
 import {takeUntil} from 'rxjs/operators';
 import {GeolocationService} from "../services/geolocation.service";
-import { darkModeSelector } from '../store/configuration.state';
+import {darkModeSelector} from '../store/configuration.state';
+import {FetchWeatherDataAction} from "../store/weather.actions";
+import {weatherSelector, WeatherState} from "../store/weather.state";
 
 
 @Component({
@@ -58,11 +60,20 @@ export class ForecastPageComponent implements AfterViewInit, OnDestroy {
       this.isDarkMode = darkMode;
     });
 
+    store.select(weatherSelector).subscribe((state: WeatherState) => {
+      this.selectedCity = state.selectedCity;
+      this.currentConditionsData = state.currentConditionsData;
+      this.isFavorite = this.checkIsFavorite(this.favorites);
+      this.forecastData = state.forecastData;
+      this.setFavoriteButtonColor();
+    });
+
   }
 
 
   async ngAfterViewInit() {
-    await this._locationService.getCurrentPosition().then(position => {
+    this.store.dispatch(new FetchWeatherDataAction());
+    /*await this._locationService.getCurrentPosition().then(position => {
       this._latitude = position.coords.latitude;
       this._longitude = position.coords.longitude;
       this._hasGeolocationApprove = true;
@@ -82,7 +93,7 @@ export class ForecastPageComponent implements AfterViewInit, OnDestroy {
             this.getLocationForecast((location.Key));
           });
       }
-    });
+    });*/
   }
 
   public onFavoriteToggle(): void {

@@ -7,7 +7,7 @@ import {CityLocation} from '../models/city-location';
 export class LocationTypePipe implements PipeTransform {
 
   transform(value: CityLocation[], type: string): CityLocation[] {
-    if (value.length === 0){
+    if (!value || value.length === 0){
       return [];
     }
     return value.filter(city => city.Type === type);

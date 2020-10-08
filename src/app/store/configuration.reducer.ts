@@ -1,6 +1,6 @@
 import * as Configurations from './configurations.actions';
-import {ConfigActionType} from './configurations.actions';
 import {ConfigurationState} from './configuration.state';
+import {ActionNames} from "./action-names";
 
 export const initialState: ConfigurationState = {
   useCelsius: true,
@@ -8,12 +8,12 @@ export const initialState: ConfigurationState = {
 };
 
 export function configurationReducer(state: ConfigurationState = initialState,
-                                     action: Configurations.ConfigActionTypes): ConfigurationState{
+                                     action: Configurations.ConfigActions): ConfigurationState {
   switch (action.type) {
-    case Configurations.ConfigActionType.TOGGLE_TEMPERATURE_UNITS:
-      return  {...state, useCelsius: !state.useCelsius};
-    case ConfigActionType.TOGGLE_DARK_MODE:
-      return {...state, darkMode: !state.darkMode}
+    case ActionNames.TOGGLE_TEMPERATURE_UNITS:
+      return {...state, useCelsius: !state.useCelsius};
+    case ActionNames.TOGGLE_DARK_MODE:
+      return {...state, darkMode: !state.darkMode};
     default:
       return state;
   }

@@ -1,16 +1,14 @@
 import {Action} from '@ngrx/store';
-
-export enum ConfigActionType {
-  TOGGLE_TEMPERATURE_UNITS = '[App] Toggle Temperature units',
-  TOGGLE_DARK_MODE = '[App] Toggle Dark mode',
-}
+import {ActionNames} from "./action-names";
 
 export class ToggleTemperatureUnitsAction implements  Action {
-  readonly type = ConfigActionType.TOGGLE_TEMPERATURE_UNITS;
+  readonly type = ActionNames.TOGGLE_TEMPERATURE_UNITS;
+  constructor() {
+  }
 }
 
 export class ToggleDarkModeAction implements  Action {
-  readonly type = ConfigActionType.TOGGLE_DARK_MODE;
+  readonly type = ActionNames.TOGGLE_DARK_MODE;
 }
 
-export type ConfigActionTypes = ToggleTemperatureUnitsAction | ToggleDarkModeAction;
+export type ConfigActions = ToggleTemperatureUnitsAction | ToggleDarkModeAction;

@@ -24,8 +24,8 @@ export class WeatherService {
   }
 
   public getAutoCompleteResults(q: string): Observable<CityLocation[]> {
-     return this._http.get<CityLocation[]>(`${this.API_URL}locations/v1/cities/autocomplete?apikey=${this.API_KEY}&q=${q}`)
-       .pipe(map(data => data ? data : []));
+    console.log('getAutoCompleteResults', q);
+    return this._http.get<CityLocation[]>(`${this.API_URL}locations/v1/cities/autocomplete?apikey=${this.API_KEY}&q=${q}`);
   }
 
   public getNextDaysForecastForLocation(locationKey: string,

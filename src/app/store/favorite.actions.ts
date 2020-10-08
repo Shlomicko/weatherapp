@@ -1,12 +1,9 @@
 import {Action} from '@ngrx/store';
 import {FavoriteData} from '../models/favorite-data';
-
-export enum FavoriteActionType {
-  TOGGLE_FAVORITES = "[Favorites] Toggle",
-}
+import {ActionNames} from "./action-names";
 
 export class ToggleFavoritesAction implements Action {
-  readonly type = FavoriteActionType.TOGGLE_FAVORITES;
+  readonly type = ActionNames.TOGGLE_FAVORITES;
   constructor(public payload: FavoriteData) {}
 }
 
