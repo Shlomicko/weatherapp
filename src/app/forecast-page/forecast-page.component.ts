@@ -48,6 +48,7 @@ export class ForecastPageComponent implements AfterViewInit, OnDestroy {
               private _snackBar: MatSnackBar) {
 
     store.select(temperatureUnitSelector).subscribe((useCelsius) => {
+      console.log('temperatureUnitSelector', useCelsius);
       this.useCelsius = useCelsius;
     });
     store.select(favoritesSelector).subscribe(favorites => {

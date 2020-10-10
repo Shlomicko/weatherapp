@@ -28,7 +28,7 @@ export class AutocompleteComponent implements OnDestroy, AfterViewInit {
   private dispose$: Subject<void> = new Subject<void>();
 
   constructor(private _weatherService: WeatherService, private store: Store<AppState>) {
-    store.select(autoCompleteResultsSelector).subscribe(cities => {
+    store.select(autoCompleteResultsSelector).subscribe((cities) => {
       console.log('AutocompleteComponent', cities);
       this.citiesList = cities;
     });

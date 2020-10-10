@@ -39,6 +39,8 @@ import {weatherReducer} from "./store/weather.reducer";
 import {WeatherDataEffects} from "./store/weather-data.effects";
 import {AutocompleteEffects} from "./store/autocomplete.effects";
 import {autoCompleteResultsReducer} from "./store/autocomplete.reducer";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,7 @@ import {autoCompleteResultsReducer} from "./store/autocomplete.reducer";
     MatDialogModule,
     MatProgressBarModule,
     EffectsModule.forRoot([WeatherDataEffects, AutocompleteEffects]),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]
