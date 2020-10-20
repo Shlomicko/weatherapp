@@ -85,7 +85,8 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
       .pipe(filter((key) => key !== 'unknown'))
       .subscribe((key: string) => {
         this.lastVisitedLocationKey = key;
-        if (this.lastVisitedLocationKey) {
+        // If we have a location key in storage AND have no location key in url
+        if (this.lastVisitedLocationKey && !this.route.snapshot.params.id) {
           this.router.navigateByUrl(`/forecast/${this.lastVisitedLocationKey}`);
         } else {
           if (!this.route.snapshot.params.id) {
