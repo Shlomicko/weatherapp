@@ -16,26 +16,6 @@
     <div class="flex-spacer"></div>
 
     <button mat-button (click)="openDialog()">Set api key</button>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="configuration menu">
-      <mat-icon>settings</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item (click)="$event.stopPropagation()" disableRipple>
-        <label id="temp-units-label">Temperatures unit</label>
-        <mat-radio-group
-          (change)="onTemperaturesUnitToggle()"
-          role="radiogroup"
-          [(ngModel)]="useCelsius"
-          aria-labelledby="temp-units-label"
-          class="units-radio-group">
-          <mat-radio-button class="unit-radio-button" [value]="true">Celsius</mat-radio-button>
-          <mat-radio-button class="unit-radio-button" [value]="false">Fahrenheit</mat-radio-button>
-        </mat-radio-group>
-      </button>
-      <button mat-menu-item disableRipple (click)="$event.stopPropagation()">
-        <mat-slide-toggle labelPosition="before" (change)="onDarkModeToggle()" >Dark mode</mat-slide-toggle>
-      </button>
-    </mat-menu>
+    <app-configuration-menu></app-configuration-menu>
   </header>
 </nav>

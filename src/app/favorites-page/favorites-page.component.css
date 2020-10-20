@@ -5,14 +5,3 @@
   row-gap: 10px;
   flex-direction: row;
 }
-
-.favorite {
-  width: 200px;
-}
-
-.favorite a {
-  text-decoration: none;
-}
-mat-card-subtitle{
-  width: 100%;
-}

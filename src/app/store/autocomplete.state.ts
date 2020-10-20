@@ -8,5 +8,5 @@ export interface AutocompleteState {
 
 export const autoCompleteResultsSelector = createSelector(
   selectAutocompleteResults,
-  (state: AutocompleteState) => state?.citiesList
+  (state: AutocompleteState) => state ? state.citiesList : []
 );

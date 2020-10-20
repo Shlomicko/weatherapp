@@ -10,27 +10,35 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../app.state";
 import {ActionNames} from "../store/action-names";
 import {autoCompleteResultsSelector} from "../store/autocomplete.state";
+import {FetchWeatherDataAction, SelectLocationKeyAction} from "../store/weather.actions";
+import {SaveLocationKeyToLocalStorageAction} from "../store/configurations.actions";
+import {getIsSaveLocationKeySelector} from "../store/configuration.state";
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.css']
 })
-export class AutocompleteComponent implements OnDestroy, AfterViewInit {
-
-  @Output() locationSelected = new EventEmitter<CityLocation>();
-
+export class AutocompleteComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('cityQuery', {read: ElementRef}) cityQuery;
 
   public autoFormControl: FormControl = new FormControl();
   public citiesList: CityLocation[] = [];
   public selectedCity: CityLocation;
+  public isSaveLastForecast: boolean;
+
   private dispose$: Subject<void> = new Subject<void>();
 
   constructor(private _weatherService: WeatherService, private store: Store<AppState>) {
-    store.select(autoCompleteResultsSelector).subscribe((cities) => {
-      console.log('AutocompleteComponent', cities);
+  }
+
+  ngOnInit() {
+    this.store.select(autoCompleteResultsSelector).subscribe((cities) => {
       this.citiesList = cities;
+    });
+
+    this.store.select(getIsSaveLocationKeySelector).subscribe((save) => {
+      this.isSaveLastForecast = save;
     });
   }
 
@@ -45,9 +53,6 @@ export class AutocompleteComponent implements OnDestroy, AfterViewInit {
       distinctUntilChanged()
     ).subscribe((query: string) => {
       this.store.dispatch({type: ActionNames.GET_AUTOCOMPLETE, payload: query});
-      /*this._weatherService.getAutoCompleteResults(query).subscribe(
-        cities => this.citiesList = cities
-      );*/
     });
   }
 
@@ -55,7 +60,12 @@ export class AutocompleteComponent implements OnDestroy, AfterViewInit {
     const items: MatOption[] = event.source.options.toArray();
     const index = items.indexOf(event.option);
     this.selectedCity = this.citiesList[index];
-    this.locationSelected.emit(this.selectedCity);
+    const key: string = this.selectedCity.Key;
+    this.store.dispatch(new SelectLocationKeyAction(key));
+
+    if (this.isSaveLastForecast) {
+      this.store.dispatch(new SaveLocationKeyToLocalStorageAction(key));
+    }
   }
 
   ngOnDestroy(): void {

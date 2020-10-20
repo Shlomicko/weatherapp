@@ -9,7 +9,6 @@ export const initialState: AutocompleteState = {
 export function autoCompleteResultsReducer(state: AutocompleteState = initialState,
                                            action: AutocompleteSuccessAction): AutocompleteState {
   if (action.type === ActionNames.GET_AUTOCOMPLETE_SUCCESS) {
-    console.log('autoCompleteResultsReducer', action.type, action.payload);
     return {...state, citiesList: action.payload};
   }
   return state;

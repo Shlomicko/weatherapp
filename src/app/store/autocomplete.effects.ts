@@ -21,7 +21,6 @@ export class AutocompleteEffects {
   );
 
   constructor(private actions$: Actions,
-              private weatherService: WeatherService,
-              private store: Store) {
+              private weatherService: WeatherService) {
   }
 }

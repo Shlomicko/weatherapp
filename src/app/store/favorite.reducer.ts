@@ -8,16 +8,19 @@ export const initialState: FavoriteState = {
 };
 
 export function favoritesReducer(state: FavoriteState = initialState, action: FavoriteActions): FavoriteState {
-  if (action.type === ActionNames.TOGGLE_FAVORITES) {
-    const contains: boolean = state.favorites.some(item => item.LocationKey === action.payload.LocationKey);
-    let newFavorites: FavoriteData[];
-    if (!contains) {
-      newFavorites = [...state.favorites, action.payload];
-    } else {
-      newFavorites = state.favorites.filter(item => item.LocationKey !== action.payload.LocationKey);
-    }
-    return {...state, favorites: newFavorites};
-  } else {
-    return state;
+  switch (action.type) {
+    case ActionNames.TOGGLE_FAVORITES:
+      const contains: boolean = state.favorites.some(item => item.LocationKey === action.payload.LocationKey);
+      let newFavorites: FavoriteData[];
+      if (!contains) {
+        newFavorites = [...state.favorites, action.payload];
+      } else {
+        newFavorites = state.favorites.filter(item => item.LocationKey !== action.payload.LocationKey);
+      }
+      return {...state, favorites: newFavorites};
+    case ActionNames.UPDATE_FAVORITES_FROM_STORAGE:
+      return {...state, favorites: action.payload};
+    default:
+      return state;
   }
 }

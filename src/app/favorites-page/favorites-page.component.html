@@ -1,20 +1,7 @@
 <section class="page-container">
   <div class="favorites">
-    <mat-card class="favorite" background-color="primary" *ngFor="let favorite of favorites">
-        <mat-card-header>
-          <mat-card-title>{{ favorite.LocationName }}</mat-card-title>
-          <mat-card-subtitle>
-            {{ favorite.CountryName }}
-          </mat-card-subtitle>
-          <mat-card-subtitle>
-            {{ favorite.WeatherText }}
-          </mat-card-subtitle>
-        </mat-card-header>
-      <button mat-raised-button color="accent" [routerLink]="['/forecast', favorite.LocationKey]">Show forecast</button>
-      <button mat-icon-button (click)="onFavoriteToggle(favorite)"
-              color="warn" aria-label="add to favorite button">
-        <mat-icon>favorite</mat-icon>
-      </button>
-    </mat-card>
+    <div *ngFor="let favorite of favorites; let i = index">
+      <app-favorite-item [favorite]="favorite" [index]="i"></app-favorite-item>
+    </div>
   </div>
 </section>

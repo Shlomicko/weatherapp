@@ -16,3 +16,8 @@ export const weatherSelector = createSelector(
   (state: WeatherState) => state
 );
 
+export const locationSelectedSelector = createSelector(
+  selectWeather,
+  (state: WeatherState) => state.locationKey
+);
+

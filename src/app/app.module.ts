@@ -4,7 +4,6 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {ForecastPageComponent} from './forecast-page/forecast-page.component';
 import {FavoritesPageComponent} from './favorites-page/favorites-page.component';
-import {SearchBarComponent} from './search-bar/search-bar.component';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './header/header.component';
 import {WeatherService} from './services/weather.service';
@@ -41,19 +40,25 @@ import {AutocompleteEffects} from "./store/autocomplete.effects";
 import {autoCompleteResultsReducer} from "./store/autocomplete.reducer";
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import {ConfigurationEffects} from "./store/configuration.effects";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { FavoriteItemComponent } from './components/favorite-item/favorite-item.component';
+import { ConfigurationMenuComponent } from './components/configuration-menu/configuration-menu.component';
+import {FavoriteEffects} from "./store/favorite.effects";
 
 @NgModule({
   declarations: [
     AppComponent,
     ForecastPageComponent,
     FavoritesPageComponent,
-    SearchBarComponent,
     HeaderComponent,
     LocationTypePipe,
     HomePageComponent,
     HtmlEntityPipe,
     AutocompleteComponent,
     SetApiDialogComponent,
+    FavoriteItemComponent,
+    ConfigurationMenuComponent,
   ],
   imports: [
     BrowserModule,
@@ -83,8 +88,9 @@ import { environment } from '../environments/environment';
     MatButtonToggleModule,
     MatDialogModule,
     MatProgressBarModule,
-    EffectsModule.forRoot([WeatherDataEffects, AutocompleteEffects]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
+    EffectsModule.forRoot([WeatherDataEffects, AutocompleteEffects, ConfigurationEffects, FavoriteEffects]),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
+    MatTooltipModule,
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]

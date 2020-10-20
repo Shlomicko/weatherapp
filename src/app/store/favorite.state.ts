@@ -8,6 +8,6 @@ export interface FavoriteState {
 
 export const favoritesSelector = createSelector(
   selectFavorites,
-  (state: FavoriteState) => state.favorites
+  (state: FavoriteState) => state
 );
 

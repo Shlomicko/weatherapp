@@ -1,0 +1,20 @@
+.favorite {
+  width: 200px;
+}
+
+.favorite button.delete-fav-button {
+  position: absolute;
+  top: 5px;
+  right: 0;
+}
+.favorite button.set-as-default-button {
+  margin-left: 10px;
+}
+
+.favorite a {
+  text-decoration: none;
+}
+
+mat-card-subtitle {
+  width: 100%;
+}

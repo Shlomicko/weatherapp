@@ -11,6 +11,8 @@ export class AutocompleteSuccessAction {
   readonly type = ActionNames.GET_AUTOCOMPLETE_SUCCESS;
 
   constructor(public payload: CityLocation[]) {
-    console.log('AutocompleteSuccessAction', payload);
   }
 }
+
+export type AutocompleteActions = GetAutocompleteAction | AutocompleteSuccessAction;
+

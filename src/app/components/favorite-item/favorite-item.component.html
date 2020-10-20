@@ -1,0 +1,18 @@
+  <mat-card class="favorite" background-color="primary" >
+    <mat-card-header>
+      <mat-card-title>{{ favorite.LocationName }}</mat-card-title>
+      <mat-card-subtitle>
+        {{ favorite.CountryName }}
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        {{ favorite.WeatherText }}
+      </mat-card-subtitle>
+    </mat-card-header>
+    <button mat-raised-button color="accent" [routerLink]="['/forecast', favorite.LocationKey]">Show forecast</button>
+    <button mat-icon-button class="delete-fav-button"
+            matTooltip="Remove"
+            [attr.data-index]="index"
+            color="warn" aria-label="delete favorite button">
+      <mat-icon>delete</mat-icon>
+    </button>
+  </mat-card>
