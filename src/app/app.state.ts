@@ -12,12 +12,6 @@ export interface AppState {
 
 export const selectConfiguration = (state: AppState) => state.configuration;
 export const selectFavorites = (state: AppState) => state.favorites;
-export const selectFavoritesList = (state: AppState) => state.favorites.favorites;
 export const selectWeather = (state: AppState) => state.weather;
-export const selectFetchData = (state: AppState) => {
-  return {
-    locationKey: state.weather.locationKey, useCelsius: state.configuration.useCelsius
-  };
-};
 export const selectAutocompleteResults = (state: AppState) => state.autoCompleteResults;
 

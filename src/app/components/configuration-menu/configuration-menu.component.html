@@ -14,10 +14,19 @@
       <mat-radio-button class="unit-radio-button" [value]="false">Fahrenheit</mat-radio-button>
     </mat-radio-group>
   </button>
-  <button mat-menu-item disableRipple (click)="$event.stopPropagation()">
-    <mat-slide-toggle labelPosition="before" [(ngModel)]="isDarkMode" (change)="onDarkModeToggle()">Dark mode</mat-slide-toggle>
+  <button class="mat-slide-toggle-container" mat-menu-item disableRipple (click)="$event.stopPropagation()">
+    <mat-slide-toggle labelPosition="before" [(ngModel)]="isDarkMode" (change)="onDarkModeToggle()">Dark mode
+    </mat-slide-toggle>
   </button>
-  <button mat-menu-item disableRipple (click)="$event.stopPropagation()">
-    <mat-slide-toggle labelPosition="before"  [(ngModel)]="isSaveLastForecast" (change)="onSetSaveLAstForecast()">Save last forecast</mat-slide-toggle>
+  <button class="mat-slide-toggle-container" mat-menu-item disableRipple (click)="$event.stopPropagation()">
+    <mat-slide-toggle labelPosition="before" [(ngModel)]="isSaveLastForecast" (change)="onSetSaveLastForecast()">
+      Save last forecast
+    </mat-slide-toggle>
+  </button>
+  <button class="mat-checkbox-container" *ngIf="cityName" mat-menu-item disableRipple
+          (click)="$event.stopPropagation()">
+    <mat-checkbox labelPosition="before" [(ngModel)]="isHomepageSet" (change)="onSetAsHomePage($event)">
+      Set '{{ cityName }}' as home page
+    </mat-checkbox>
   </button>
 </mat-menu>

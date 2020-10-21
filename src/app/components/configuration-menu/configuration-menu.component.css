@@ -12,3 +12,10 @@
 button {
   height: fit-content;
 }
+mat-slide-toggle{
+  width: 100%;
+}
+/deep/ .mat-slide-toggle-container .mat-slide-toggle-label{
+  width: 100%;
+  justify-content: space-between !important;
+}

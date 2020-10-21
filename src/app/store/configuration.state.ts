@@ -4,7 +4,7 @@ import {selectConfiguration} from '../app.state';
 export interface ConfigurationState {
   useCelsius: boolean;
   darkMode: boolean;
-  defaultForecast: string;
+  homePageLocationKey: string;
   isSaveLastLocationKey: boolean;
   savedLocationKey: string;
 }
@@ -23,8 +23,14 @@ export const getSavedLocationKeySelector = createSelector(
   selectConfiguration,
   (state: ConfigurationState) => state.savedLocationKey
 );
+
 export const getIsSaveLocationKeySelector = createSelector(
   selectConfiguration,
   (state: ConfigurationState) => state.isSaveLastLocationKey
+);
+
+export const getHomePageSelector = createSelector(
+  selectConfiguration,
+  (state: ConfigurationState) => state.homePageLocationKey
 );
 

@@ -3,16 +3,16 @@ import {FormControl} from '@angular/forms';
 import {MatAutocompleteSelectedEvent} from '@angular/material/autocomplete';
 import {MatOption} from '@angular/material/core';
 import {fromEvent, Subject} from 'rxjs';
-import {CityLocation} from '../models/city-location';
+import {CityLocation} from '../../models/city-location';
 import {debounceTime, distinctUntilChanged, filter, map, takeUntil} from 'rxjs/operators';
-import {WeatherService} from '../services/weather.service';
+import {WeatherService} from '../../services/weather.service';
 import {Store} from "@ngrx/store";
-import {AppState} from "../app.state";
-import {ActionNames} from "../store/action-names";
-import {autoCompleteResultsSelector} from "../store/autocomplete.state";
-import {FetchWeatherDataAction, SelectLocationKeyAction} from "../store/weather.actions";
-import {SaveLocationKeyToLocalStorageAction} from "../store/configurations.actions";
-import {getIsSaveLocationKeySelector} from "../store/configuration.state";
+import {AppState} from "../../app.state";
+import {ActionNames} from "../../store/action-names";
+import {autoCompleteResultsSelector} from "../../store/autocomplete.state";
+import {FetchWeatherDataAction, SelectLocationKeyAction} from "../../store/weather.actions";
+import {SaveLocationKeyToLocalStorageAction} from "../../store/configurations.actions";
+import {getIsSaveLocationKeySelector} from "../../store/configuration.state";
 
 @Component({
   selector: 'app-autocomplete',

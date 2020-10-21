@@ -33,7 +33,7 @@ export class WeatherDataEffects {
             return new SuccessfulWeatherDataFetchAction({
               currentConditionsData,
               forecastData,
-              selectedCity: cityLocation
+              selectedCity: cityLocation,
             });
           })
         );

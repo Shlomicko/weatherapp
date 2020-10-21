@@ -41,10 +41,29 @@ export class UpdateIsSaveLastForecastAction implements Action{
   }
 }
 
+export class SetAsHomePageAction implements Action{
+  readonly type = ActionNames.SET_AS_HOME_PAGE;
+  constructor(public locationKey: string) {
+  }
+}
+
+export class GetHomePageAction implements Action{
+  readonly type = ActionNames.GET_HOME_PAGE;
+  constructor() {
+  }
+}
+export class UpdateHomePageAction implements Action{
+  readonly type = ActionNames.UPDATE_HOME_PAGE_IN_STATE;
+  constructor(public locationKey: string) {
+  }
+}
+
 export type ConfigActions =
   ToggleTemperatureUnitsAction
   | ToggleDarkModeAction
   | ToggleSetSaveLastForecastAction
   | GetLocationKeyFromLocalStorageAction
   | SaveLocationKeyToLocalStorageAction
-  | UpdateLocationKeyAction;
+  | UpdateLocationKeyAction
+  | SetAsHomePageAction
+  | UpdateHomePageAction;

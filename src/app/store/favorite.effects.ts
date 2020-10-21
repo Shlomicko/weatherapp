@@ -20,14 +20,6 @@ export class FavoriteEffects {
       );
     }))
   );
-  /*public saveFavorites = createEffect(() => this.actions$.pipe(
-    ofType(ActionNames.TOGGLE_FAVORITES),
-    mergeMap((action: ToggleFavoritesAction) => {
-      return this.storageService.saveFavorites(action.payload).pipe(
-        map((favoritesList) => new UpdateFavoritesFromLocalStorageAction(favoritesList))
-      );
-    }))
-  );*/
 
   public getFavorites = createEffect(() => this.actions$.pipe(
     ofType(ActionNames.GET_FAVORITES),

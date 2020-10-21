@@ -6,7 +6,7 @@ import {ForecastData} from '../models/forecast-data';
 import {CurrentConditionsData} from '../models/current-conditions-data';
 import {Store} from '@ngrx/store';
 import {AppState} from '../app.state';
-import {getSavedLocationKeySelector, temperatureUnitSelector} from '../store/configuration.state';
+import {getHomePageSelector, getSavedLocationKeySelector, temperatureUnitSelector} from '../store/configuration.state';
 import {ToggleFavoritesAction} from '../store/favorite.actions';
 import {favoritesSelector} from '../store/favorite.state';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -17,7 +17,7 @@ import {GeolocationService} from "../services/geolocation.service";
 import {darkModeSelector} from '../store/configuration.state';
 import {FetchWeatherDataAction} from "../store/weather.actions";
 import {weatherSelector, WeatherState} from "../store/weather.state";
-import {GetLocationKeyFromLocalStorageAction} from "../store/configurations.actions";
+import {GetHomePageAction, GetLocationKeyFromLocalStorageAction} from "../store/configurations.actions";
 
 
 @Component({
@@ -41,6 +41,7 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
   private longitude: number;
   private hasGeolocationApprove: boolean = false;
   private lastVisitedLocationKey: string = null;
+  private homePageLocationKey: string;
 
 
   constructor(private weatherService: WeatherService,
@@ -81,11 +82,22 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
       }
     );
 
+    this.store.select(getHomePageSelector)
+      .pipe(filter((key) => key !== 'unknown'))
+      .subscribe((homePageKey: string) => {
+        this.homePageLocationKey = homePageKey;
+        if (!this.homePageLocationKey) {
+          this.store.dispatch(new GetLocationKeyFromLocalStorageAction());
+        } else {
+          this.getLocationForecast(this.homePageLocationKey);
+        }
+      });
+
     this.store.select(getSavedLocationKeySelector)
       .pipe(filter((key) => key !== 'unknown'))
       .subscribe((key: string) => {
         this.lastVisitedLocationKey = key;
-        // If we have a location key in storage AND have no location key in url
+        // If we have a location key in storage AND have no location key in url (i.e no id in params)
         if (this.lastVisitedLocationKey && !this.route.snapshot.params.id) {
           this.router.navigateByUrl(`/forecast/${this.lastVisitedLocationKey}`);
         } else {
@@ -109,7 +121,7 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   async ngAfterViewInit() {
-    this.store.dispatch(new GetLocationKeyFromLocalStorageAction());
+    this.store.dispatch(new GetHomePageAction());
     this.route.params.pipe(takeUntil(this.disposeAll$)).subscribe(params => {
       const locationKey: string = params['id'];
       if (locationKey) {
@@ -141,6 +153,10 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
 
   private setFavoriteButtonColor() {
     this.isFavoriteColor = this.isFavorite ? 'warn' : 'grey';
+  }
+
+  private navigateToForeCast(to: string): void {
+
   }
 
   ngOnDestroy(): void {

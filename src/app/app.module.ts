@@ -23,7 +23,7 @@ import {configurationReducer} from './store/configuration.reducer';
 import {HtmlEntityPipe} from './pipes/html-entity-pipe';
 import {favoritesReducer} from './store/favorite.reducer';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {AutocompleteComponent} from './autocomplete/autocomplete.component';
+import {AutocompleteComponent} from './components/autocomplete/autocomplete.component';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {MatChipsModule} from '@angular/material/chips';
 import {MatIconModule} from '@angular/material/icon';
@@ -45,6 +45,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import { FavoriteItemComponent } from './components/favorite-item/favorite-item.component';
 import { ConfigurationMenuComponent } from './components/configuration-menu/configuration-menu.component';
 import {FavoriteEffects} from "./store/favorite.effects";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import {FavoriteEffects} from "./store/favorite.effects";
     EffectsModule.forRoot([WeatherDataEffects, AutocompleteEffects, ConfigurationEffects, FavoriteEffects]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
     MatTooltipModule,
+    MatCheckboxModule,
   ],
   providers: [WeatherService],
   bootstrap: [AppComponent]
