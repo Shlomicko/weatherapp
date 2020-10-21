@@ -11,7 +11,7 @@ export interface WeatherState {
   readonly forecastData?: ForecastData;
 }
 
-export const weatherSelector = createSelector(
+export const weatherDataSelector = createSelector(
   selectWeather,
   (state: WeatherState) => state
 );

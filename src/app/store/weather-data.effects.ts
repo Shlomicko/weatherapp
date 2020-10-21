@@ -10,15 +10,15 @@ import {of, zip} from "rxjs";
 
 @Injectable()
 export class WeatherDataEffects {
-
+/*
   public locationKeySelected$ = createEffect(() =>
     this.actions$.pipe(
-      ofType(ActionNames.SELECT_LOCATION_KEY),
+      ofType(ActionNames.NEW_LOCATION_SELECTED),
       mergeMap((action: SelectLocationKeyAction) => of(action.locationKey).pipe(
         map(key => new FetchWeatherDataAction(key))),
       )
     )
-  );
+  );*/
 
   public fetchDataForCurrentUnits$ = createEffect(() =>
     this.actions$.pipe(

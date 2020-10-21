@@ -15,7 +15,7 @@ export class SuccessfulWeatherDataFetchAction {
 }
 
 export class SelectLocationKeyAction implements Action{
-  readonly type = ActionNames.SELECT_LOCATION_KEY;
+  readonly type = ActionNames.NEW_LOCATION_SELECTED;
   constructor(public locationKey: string) {
   }
 }

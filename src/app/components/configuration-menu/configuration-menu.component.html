@@ -26,7 +26,7 @@
   <button class="mat-checkbox-container" *ngIf="cityName" mat-menu-item disableRipple
           (click)="$event.stopPropagation()">
     <mat-checkbox labelPosition="before" [(ngModel)]="isHomepageSet" (change)="onSetAsHomePage($event)">
-      Set '{{ cityName }}' as home page
+      {{ isHomepageSet ? "Remove" : "Set" }} <B>{{ cityName }}</B> as home page
     </mat-checkbox>
   </button>
 </mat-menu>

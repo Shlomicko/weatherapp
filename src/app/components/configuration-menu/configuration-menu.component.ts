@@ -5,7 +5,7 @@ import {ToggleSetSaveLastForecastAction} from "../../store/configurations.action
 import {Store} from "@ngrx/store";
 import {AppState} from "../../app.state";
 import {getHomePageSelector, getIsSaveLocationKeySelector, temperatureUnitSelector} from "../../store/configuration.state";
-import {weatherSelector, WeatherState} from "../../store/weather.state";
+import {weatherDataSelector, WeatherState} from "../../store/weather.state";
 import {filter, skip} from "rxjs/operators";
 
 @Component({
@@ -37,7 +37,7 @@ export class ConfigurationMenuComponent implements OnInit {
         this.isSaveLastForecast = save;
       });
 
-    this.store.select(weatherSelector)
+    this.store.select(weatherDataSelector)
       .pipe(skip(1))
       .subscribe((state: WeatherState) => {
           this.cityName = state.selectedCity?.LocalizedName;

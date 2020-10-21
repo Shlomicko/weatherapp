@@ -26,7 +26,7 @@ export class ConfigurationEffects {
     )
   );
 
-  public getLocationKey = createEffect(() =>
+  public getSavedLocationKey = createEffect(() =>
     this.actions$.pipe(
       ofType(ActionNames.GET_LOCATION_KEY_FROM_LOCAL_STORAGE),
       mergeMap((action: GetLocationKeyFromLocalStorageAction) => this.storageService.getSavedLocationKey()

@@ -13,8 +13,9 @@ import {TemperatureSymbol} from '../models/temperature-symbol.enum';
 })
 export class WeatherService {
 
+  private API_KEY: string = 'R0A8Nz7WqfF8DsNM3JAEfL9239HJNyFB';
   // private API_KEY: string = 'S4iyCmDFGYPJsRETgZDoL0lhJWIOGjkF';
-  private API_KEY: string = '71BNJFRMT7elZCXqZ4KpUpxju8fmPfMd';
+  // private API_KEY: string = '71BNJFRMT7elZCXqZ4KpUpxju8fmPfMd';
   private readonly API_URL: string = 'https://dataservice.accuweather.com/';
 
   constructor(private _http: HttpClient) {

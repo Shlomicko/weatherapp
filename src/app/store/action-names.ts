@@ -11,7 +11,7 @@ export class ActionNames {
   public static readonly WEATHER_DATA_FETCH_SUCCESS = "[Weather] Fetch success";
   public static readonly GET_LOCATION_KEY_FROM_LOCAL_STORAGE = "[Local Storage] Get location key";
   public static readonly SAVE_LOCATION_KEY_IN_LOCAL_STORAGE = "[Local Storage] Set location key";
-  public static readonly SELECT_LOCATION_KEY = "[Local Storage] Select location key";
+  public static readonly NEW_LOCATION_SELECTED = "[App] New location selected";
   public static readonly GET_AUTOCOMPLETE = "[App] Get autocomplete";
   public static readonly GET_AUTOCOMPLETE_SUCCESS = "[App] Get autocomplete success";
   public static readonly SET_AS_HOME_PAGE = "[App] Set as homepage";

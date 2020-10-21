@@ -16,7 +16,7 @@ import {filter, takeUntil} from 'rxjs/operators';
 import {GeolocationService} from "../services/geolocation.service";
 import {darkModeSelector} from '../store/configuration.state';
 import {FetchWeatherDataAction} from "../store/weather.actions";
-import {weatherSelector, WeatherState} from "../store/weather.state";
+import {locationSelectedSelector, weatherDataSelector, WeatherState} from "../store/weather.state";
 import {GetHomePageAction, GetLocationKeyFromLocalStorageAction} from "../store/configurations.actions";
 
 
@@ -55,6 +55,9 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.store.select(temperatureUnitSelector).subscribe((useCelsius) => {
       this.useCelsius = useCelsius;
+      if(this.selectedCity){
+        this.getLocationForecast(this.selectedCity.Key);
+      }
     });
 
     this.store.select(favoritesSelector).pipe(takeUntil(this.disposeAll$))
@@ -69,7 +72,16 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
       this.isDarkMode = darkMode;
     });
 
-    this.store.select(weatherSelector).subscribe((state: WeatherState) => {
+    this.store.select(locationSelectedSelector)
+      .pipe(filter((key: string) => {
+        console.log('locationSelectedSelector', key);
+        return key !== undefined;
+      }))
+      .subscribe((key: string) => {
+      this.getLocationForecast(key);
+    });
+
+    this.store.select(weatherDataSelector).subscribe((state: WeatherState) => {
         this.selectedCity = state.selectedCity;
         this.currentConditionsData = state.currentConditionsData;
         this.isFavorite = this.checkIsFavorite(this.favorites);
@@ -89,7 +101,7 @@ export class ForecastPageComponent implements OnInit, AfterViewInit, OnDestroy {
         if (!this.homePageLocationKey) {
           this.store.dispatch(new GetLocationKeyFromLocalStorageAction());
         } else {
-          this.getLocationForecast(this.homePageLocationKey);
+          this.router.navigateByUrl(`/forecast/${this.homePageLocationKey}`);
         }
       });
 
